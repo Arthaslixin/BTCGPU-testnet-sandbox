@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>BTG testnet faucet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="BTG testnet faucet">
+    <meta name="keywords" content="BTG, testnet, faucet">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="emsit">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/jsbn.min.js"></script>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/2.5.3-crypto-sha256.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/validate.min.js') }}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas"></canvas>
+    </div>
+    <div class="faucetcontainer">
+        <div class="mainbox col-md-5 col-md-offset-4 col-sm-8 col-sm-offset-2 faucetbox">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">BTG testnet faucet</div>
+                </div>
+                <div class="panel-body panel-pad top10">
+                    <form method="post" class="form-horizontal" role="form" action="{{url_for('sendtoaddress')}}">
+                        <div id='address-group' class="input-group bot25 ">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-btc"></i></span>
+                            <input id="address" type="text" class="form-control" name="address" placeholder="Your testnet address" value="">
+                            <!-- <input id="address" type="text" class="form-control" name="address" placeholder="Your testnet address" value="" autofocus oninput="validateAddress(this.value);" required> -->
+                        </div>
+                        <div class="form-group top10">
+                            <div class="col-sm-12 controls">
+                                <button id="submitButton" class="btn btn-block btn-primary" name="submit">Get BTGs!</button>
+                                <div class="g-recaptcha" data-sitekey="6LcYNEUUAAAAAPl4dZlwh1PrbF6pw5TcYUd5j0Sh"></div>
+                            </div>
+                            <div class="col-sm-12 controls">
+                                {% if data %}
+                                Already sent {{data['count']}} coin to {{data['addr']}} 
+                                {{data['txid']}}
+                                {% endif %}
+                                {{err}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+            <ul class="navbar-text nav pull-left">
+                <!-- <li>Total number of requests xxxxx.</li>
+                <li>Total amount sent xxxxx.xxxx BTG + fee xx.xxxxxx BTC = xxxxx.xxxxxxxx BTG.</li> -->
+                <li>{{balance}}</li>
+            </ul>
+            <ul class="navbar-text nav pull-right">
+                <!-- <li>Privacy notice: We store your IP address to prevent abuse of our service.</li> -->
+                <li>Your IP address is: {{userIP}}</li>
+            </ul>
+        </div>
+    </div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.2/bootstrap-native.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenLite.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/easing/EasePack.min.js"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/demo-1.js') }}"></script>
+</body>
+</html>
