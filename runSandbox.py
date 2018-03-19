@@ -1,7 +1,6 @@
 #coding=utf-8
 import os
 from flask import Flask, request, url_for, render_template, flash, redirect
-import redis
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from requests import post
 import sys
