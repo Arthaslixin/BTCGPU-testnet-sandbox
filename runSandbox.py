@@ -1,7 +1,6 @@
 #coding=utf-8
 import os
 from flask import Flask, request, url_for, render_template, flash, redirect
-import redis
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 from requests import post
 import sys
@@ -11,13 +10,13 @@ app = Flask(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
     DEBUG=True,
-    SECRET_KEY='gugugu'
+    SECRET_KEY='4HqpixKatu'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 def connectRPC():
-    rpc_user='arthas'
-    rpc_password='arthas'
+    rpc_user='CHANGE_THIS_USERNAME'
+    rpc_password='CHANGE_THIS_PASSWORD'
 
     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:18332"%(rpc_user, rpc_password))
     return rpc_connection
@@ -37,7 +36,7 @@ def index():
     return render_template('index.html',balance = get_balance(), userIP=request.remote_addr)
 
 @app.route('/sendtoaddress', methods=['POST'])
-def send_to_address():
+def sendtoaddress():
     reCAPTCHA_data = {'secret':'6LcYNEUUAAAAAAlBF51pojGTGogSLPfySrbBgAeh','response':request.form['g-recaptcha-response'],'remoteip':request.remote_addr}
     try:
         if 'proxy=yes' in sys.argv:
@@ -66,4 +65,4 @@ def send_to_address():
         return render_template('index.html',err = err, balance=get_balance(), userIP=request.remote_addr)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)  # CHANGE_THIS
